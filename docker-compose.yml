@@ -1,5 +1,5 @@
 version: "3.3"
-   
+
 services:
   db:
     build:
@@ -13,8 +13,9 @@ services:
         aliases:
           - tak-database
     ports:
-      - 5432:5432 
+      - "172.16.0.125:5432:5432"
     restart: unless-stopped
+
   tak:
     build:
       context: .
@@ -24,18 +25,20 @@ services:
     volumes:
       - "./tak:/opt/tak:z"
     ports:
-      - "8443:8443"
-      - "8444:8444"
-      - "8446:8446"
-      - "8089:8089"
-      - "9000:9000"
-      - "9001:9001"
+      - "172.16.0.125:8443:8443"
+      - "172.16.0.125:8444:8444"
+      - "172.16.0.125:8446:8446"
+      - "172.16.0.125:8089:8089"
+      - "172.16.0.125:9000:9000"
+      - "172.16.0.125:9001:9001"
     networks:
       tak:
     depends_on:
       - db
     restart: unless-stopped
+
 volumes:
   db_data:
+
 networks:
   tak:
